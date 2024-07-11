@@ -33,7 +33,8 @@ else:
     print("No common keys found in 'session_swing' between POI Metrics and Metadata.")
 
 poi_columns = [
-    'blast_bat_speed_mph_x',
+    #'blast_bat_speed_mph_x',
+    'bat_speed_mph_max_x',
     "bat_weight_oz",
     'bat_torso_angle_connection_x', 
     'bat_torso_angle_ds_x', 
@@ -149,23 +150,22 @@ poi_metrics = poi_metrics[poi_columns].dropna()
 print(poi_metrics.shape)
 
 # prepare the data
-X = poi_metrics.drop('blast_bat_speed_mph_x', axis=1)
+#X = poi_metrics.drop('blast_bat_speed_mph_x', axis=1)
+X = poi_metrics.drop('bat_speed_mph_max_x', axis=1)
 X = X.apply(pd.to_numeric, errors='coerce')
 cols_with_na = X.columns[X.isna().any()].tolist()
 print(f"Columns with NA values: {cols_with_na}")
 X = X.dropna(axis=1, how='any')
 print(f"X Shape: {X.shape}")
-y = poi_metrics["blast_bat_speed_mph_x"]
+#y = poi_metrics["blast_bat_speed_mph_x"]
+y = poi_metrics["bat_speed_mph_max_x"]
 
-
-# Check for multicollinearity and remove highly correlated features
+# check for multicollinearity and remove highly correlated features
 threshold = 5.0  # Variance Inflation Factor threshold
 vif_data = pd.DataFrame()
 vif_data["feature"] = X.columns
 vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
 X = X.loc[:, vif_data[vif_data["VIF"] < threshold]["feature"]]
-
-
 
 # scale values for better regression results
 scaler = StandardScaler()
@@ -179,7 +179,7 @@ simple_model = xgb.XGBRegressor()
 simple_model.fit(X_train, y_train)
 
 # save the model
-simple_model.save_model('simple_model.json')
+simple_model.save_model('bat_speed_model.json')
 
 # make predictions
 y_pred = simple_model.predict(X_test)
@@ -192,6 +192,13 @@ r2score = r2_score(y_test, y_pred)
 print(f"MSE: {mse_score}")
 print(f"MAE: {mae_score}")
 print(f"r^2: {r2score}")
+
+# plot results
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual Bat Speed")
+plt.ylabel("Predicted Bat Speed")
+plt.title(f"Actual vs Predicted Bat Speed (r^2 = {r2score}, MAE = {mae_score})")
+plt.show()
 
 # determine feature importance using SHAP
 explainer = shap.Explainer(simple_model)
