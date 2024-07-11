@@ -32,13 +32,13 @@ All C3Ds follow a common naming convention.
 
 ![image2.png](imgs/image2.png)
 
-*NOTE: LIC and RIC (Iliac Crest markers) are no longer used and may not be present in some C3D files. Additionally, RKNEE2 and LKNEE2 are labeled as RMKNE and LMKNE respectively.*
+_NOTE: LIC and RIC (Iliac Crest markers) are no longer used and may not be present in some C3D files. Additionally, RKNEE2 and LKNEE2 are labeled as RMKNE and LMKNE respectively._
 
 ### Back View
 
 ![image3.png](imgs/image3.png)
 
-*NOTE: LIC and RIC (Iliac Crest markers) are no longer used and may not be present in some C3D files. Additionally, RKNEE2 and LKNEE2 are labeled as RMKNE and LMKNE respectively.*
+_NOTE: LIC and RIC (Iliac Crest markers) are no longer used and may not be present in some C3D files. Additionally, RKNEE2 and LKNEE2 are labeled as RMKNE and LMKNE respectively._
 
 ### Bat Rigid Body
 
@@ -52,7 +52,7 @@ Ground reaction force data were collected using four force plates embedded under
 
 ![hitting_force_plates.PNG](imgs/hitting_force_plates.png)
 
-***NOTE: Hitters will start with one or both feet on the back force plate (#4 or #3) and land with just their lead leg on the front force plate (#1 or #2).***
+**_NOTE: Hitters will start with one or both feet on the back force plate (#4 or #3) and land with just their lead leg on the front force plate (#1 or #2)._**
 
 ## Global Coordinate System
 
@@ -78,28 +78,28 @@ Below is a list of joint and bat mechanics, their components, and conventions. W
 
 ### Kinematics (Joint/Bat Angles, Joint/Bat Velocities)
 
-| Joint | C1 (”_X”) | C2 (”_Y”) | C3 (”_Z”) |
-| --- | --- | --- | --- |
-| Wrist | Flexion (-)/Extension (+) | Ulnar (-)/Radial (+) Deviation | Constrained |
-| Elbow | Flexion (+)/Extension (-) | Constrained | Pronation (+)/Supination (-) |
-| Shoulder | Horizontal Ab (+)/Adduction (-) | Ab (+)/Adduction (-) | External (+)/Internal (-) Rotation |
-| Pelvis | Posterior (+)/Anterior (-) Tilt | Lateral Tilt Toward (+)/Away From Rear Leg | Axial Rotation Toward (+)/Away (-) From Mound |
-| Torso | Extension (+)/Flexion (-) | Lateral Tilt Toward (+)/Away From Rear Leg | Axial Rotation Toward (+)/Away (-) From Mound |
-| Torso-Pelvis | Extension (+)/Flexion (-) | Lateral Tilt Toward (+)/Away From Rear Leg | Torso Rotated Toward Mound; Pelvis Rotated Toward Catcher (+)/Torso Rotated Toward Catcher; Pelvis Rotated Toward Mound (-) |
-| Hip | Flexion (+)/Extension (-) | Ab (+)/Adduction (-) | Internal (+)/External (-) Rotation |
-| Knee | Flexion (+)/Extension (-) | Constrained | Constrained |
-| Ankle | Dorsi (+)/Plantar (-) Flexion | Eversion (+)/Inversion (-) | Lateral (+)/Medial (-) Rotation |
-| Bat | Bat Rotation Around Spine Toward (+)/Away (-) From Mound | Bat End Pointing Upward (+)/Downward (-) | Axial Rotation: Left Handed Swings - Rotation Toward (+)/Away (-) From Mound | Right Handed Swings - Rotation Toward (+)/Away (-) From Mounds |
-| Bat-Torso | NA | Barrel Moving Upward (+)/Downward (-) Relative to Torso | NA |
-| Attack Angle | Sweet Spot of Bat Moving Upward (+)/Downward (-) | NA | NA |
+| Joint        | C1 (”\_X”)                                               | C2 (”\_Y”)                                              | C3 (”\_Z”)                                                                                                                  |
+| ------------ | -------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Wrist        | Flexion (-)/Extension (+)                                | Ulnar (-)/Radial (+) Deviation                          | Constrained                                                                                                                 |
+| Elbow        | Flexion (+)/Extension (-)                                | Constrained                                             | Pronation (+)/Supination (-)                                                                                                |
+| Shoulder     | Horizontal Ab (+)/Adduction (-)                          | Ab (+)/Adduction (-)                                    | External (+)/Internal (-) Rotation                                                                                          |
+| Pelvis       | Posterior (+)/Anterior (-) Tilt                          | Lateral Tilt Toward (+)/Away From Rear Leg              | Axial Rotation Toward (+)/Away (-) From Mound                                                                               |
+| Torso        | Extension (+)/Flexion (-)                                | Lateral Tilt Toward (+)/Away From Rear Leg              | Axial Rotation Toward (+)/Away (-) From Mound                                                                               |
+| Torso-Pelvis | Extension (+)/Flexion (-)                                | Lateral Tilt Toward (+)/Away From Rear Leg              | Torso Rotated Toward Mound; Pelvis Rotated Toward Catcher (+)/Torso Rotated Toward Catcher; Pelvis Rotated Toward Mound (-) |
+| Hip          | Flexion (+)/Extension (-)                                | Ab (+)/Adduction (-)                                    | Internal (+)/External (-) Rotation                                                                                          |
+| Knee         | Flexion (+)/Extension (-)                                | Constrained                                             | Constrained                                                                                                                 |
+| Ankle        | Dorsi (+)/Plantar (-) Flexion                            | Eversion (+)/Inversion (-)                              | Lateral (+)/Medial (-) Rotation                                                                                             |
+| Bat          | Bat Rotation Around Spine Toward (+)/Away (-) From Mound | Bat End Pointing Upward (+)/Downward (-)                | Axial Rotation: Left Handed Swings - Rotation Toward (+)/Away (-) From Mound                                                | Right Handed Swings - Rotation Toward (+)/Away (-) From Mounds |
+| Bat-Torso    | NA                                                       | Barrel Moving Upward (+)/Downward (-) Relative to Torso | NA                                                                                                                          |
+| Attack Angle | Sweet Spot of Bat Moving Upward (+)/Downward (-)         | NA                                                      | NA                                                                                                                          |
 
 ### Processed Ground Reaction Force Conventions
 
 Ground reaction force data were filtered with a 4th order Butterworth low pass filter with a cutoff frequency of 40.0 Hz
 
-| Force Plate | X | Y | Z |
-| --- | --- | --- | --- |
-| All | + = Toward Pitcher | + = Posterior  | + = Superior |
+| Force Plate | X                  | Y             | Z            |
+| ----------- | ------------------ | ------------- | ------------ |
+| All         | + = Toward Pitcher | + = Posterior | + = Superior |
 
 ### Table Schema
 
@@ -110,7 +110,7 @@ Full signal data are broken up into four large CSV files:
 - `joint_velos`: joint angular velocities
 - `landmarks`: joint center positions
 
-Tables may be joined using `session_swing` + `time`. Please note that force plate and marker-derived data are provided at their own respective measurement rates (360 Hz and 1,080 Hz, 
+Tables may be joined using `session_swing` + `time`. Please note that force plate and marker-derived data are provided at their own respective measurement rates (360 Hz and 1,080 Hz,
 respectively). Therefore, we recommend caution when joining force plate and marker-derived data to avoid potential data loss.
 
 The times at which common events occurred are also joined in each table for convenience. Provided events are front foot contact (10% bodyweight), front foot plant (100% bodyweight), and contact.
@@ -119,22 +119,22 @@ One potential research project is to process the provided C3D using your own pip
 
 ### Landmarks Key
 
-| Abbreviation | Definition |
-| --- | --- |
-| lhjc | left hand joint center |
-| left_hip | left hip joint center |
-| lsjc | left shoulder joint center |
-| lejc | left elbow joint center |
-| lkjc | left knee joint center |
-| lajc | left ankle joint center |
-| lwjc | left wrist joint center |
-| rhjc | right hand joint center |
-| right_hip | right hip joint center |
-| rsjc | right shoulder joint center |
-| rejc | right shoulder joint center |
-| rkjc | right knee joint center |
-| rajc | right ankle joint center |
-| rwjc | right wrist joint center |
+| Abbreviation | Definition                  |
+| ------------ | --------------------------- |
+| lhjc         | left hand joint center      |
+| left_hip     | left hip joint center       |
+| lsjc         | left shoulder joint center  |
+| lejc         | left elbow joint center     |
+| lkjc         | left knee joint center      |
+| lajc         | left ankle joint center     |
+| lwjc         | left wrist joint center     |
+| rhjc         | right hand joint center     |
+| right_hip    | right hip joint center      |
+| rsjc         | right shoulder joint center |
+| rejc         | right shoulder joint center |
+| rkjc         | right knee joint center     |
+| rajc         | right ankle joint center    |
+| rwjc         | right wrist joint center    |
 
 # Point of Interest
 
@@ -152,10 +152,10 @@ Kinematic metrics commonly referenced in biomechanical analyses are arranged int
 'bat_torso_angle_connection_x' : bat-torso angle at down swing event - this is the same as bat_torso_angle_ds and is what Blast Motion calls “Early Connection” (deg)
 'attack_angle_contact_x': vertical attack angle at contact (deg)
 'bat_speed_mph_max_x': maximum resultant bat speed (miles per hour)
-'bat_speed_xy_max_x' : maximum resultant angular velocity of the bat - just x and y components (deg/sec) 
+'bat_speed_xy_max_x' : maximum resultant angular velocity of the bat - just x and y components (deg/sec)
 'bat_torso_angle_ds_y' : vertical bat angle relative to the torso at down swing event - this is the same as bat_torso_angle_connection and is what Blast calls “Early Connection” (deg)
-'hand_speed_blast_bat_mph_max_x' : maximum hand speed in mph - calculated the same way as Blast’s hand speed (deg/sec) 
-'hand_speed_mag_max_x' : maximum resultant hand speed between first move and contact (deg/sec) 
+'hand_speed_blast_bat_mph_max_x' : maximum hand speed in mph - calculated the same way as Blast’s hand speed (deg/sec)
+'hand_speed_mag_max_x' : maximum resultant hand speed between first move and contact (deg/sec)
 'pelvis_angle_fm_x': pelvis angle (x) at first move - ussing K-Vest conventions (deg)
 'pelvis_angle_fm_y': pelvis angle (y) at first move - ussing K-Vest conventions (deg)
 'pelvis_angle_fm_z': pelvis angle (z) at first move - ussing K-Vest conventions (deg)
@@ -174,33 +174,33 @@ Kinematic metrics commonly referenced in biomechanical analyses are arranged int
 'torso_angle_hs_x' : torso angle (x) at heel strike - using K-Vest conventions (deg)
 'torso_angle_hs_y' : torso angle (y) at heel strike - using K-Vest conventions (deg)
 'torso_angle_hs_z' : torso angle (z) at heel strike - using K-Vest conventions (deg)
-'upper_arm_speed_mag_max_x' : maximum resultant upper arm speed between first move and contact (deg/sec) 
+'upper_arm_speed_mag_max_x' : maximum resultant upper arm speed between first move and contact (deg/sec)
 'x_factor_fm_x' : x-factor angle (x) at first move (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_fm_y' : x-factor angle (y) at first move (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_fm_z' : x-factor angle (z) at first move (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_fp_x' : x-factor angle (x) at foot plant (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_fp_y' : x-factor angle (y) at foot plant (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_fp_z' : x-factor angle (z) at foot plant (same as torso-pelvis angle) - using K-Vest conventions (deg)
-'bat_max_x' : maximum bat angular velocity relative to the lab - used for tagging handedness (deg/sec) 
-'bat_min_x' : minimum bat angular velocity relative to the lab - used for tagging handedness (deg/sec) 
-'hand_speed_mag_fm_x' : resultant hand speed at first move (deg/sec) 
-'hand_speed_mag_fp_x': resultant hand speed at foot plant (deg/sec) 
-'hand_speed_mag_maxhss_x' : resultant hand speed at maximum hip-shoulder separation (deg/sec) 
-'hand_speed_mag_seq_max_x' : maximum resultant hand speed between first move and contact (deg/sec) 
-'hand_speed_mag_stride_max_velo_x' : maximum resultant hand speed between load and foot plant (deg/sec) 
-'hand_speed_mag_swing_max_velo_x' : maximum resultant hand speed between load and contact (deg/sec) 
+'bat_max_x' : maximum bat angular velocity relative to the lab - used for tagging handedness (deg/sec)
+'bat_min_x' : minimum bat angular velocity relative to the lab - used for tagging handedness (deg/sec)
+'hand_speed_mag_fm_x' : resultant hand speed at first move (deg/sec)
+'hand_speed_mag_fp_x': resultant hand speed at foot plant (deg/sec)
+'hand_speed_mag_maxhss_x' : resultant hand speed at maximum hip-shoulder separation (deg/sec)
+'hand_speed_mag_seq_max_x' : maximum resultant hand speed between first move and contact (deg/sec)
+'hand_speed_mag_stride_max_velo_x' : maximum resultant hand speed between load and foot plant (deg/sec)
+'hand_speed_mag_swing_max_velo_x' : maximum resultant hand speed between load and contact (deg/sec)
 'lead_knee_launchpos_x' : lead knee angle (x) at foot plant (deg)
 'lead_knee_stride_max_x' : maximum knee angle (x) between load and foot plant (deg)
 'lead_knee_stride_max_y' : maximum knee angle (y) between load and foot plant (deg)
 'lead_knee_stride_max_z' : maximum knee angle (z) between load and foot plant (deg)
 'lead_wrist_fm_x' : lead wrist angle (x) at first move (deg)
 'lead_wrist_swing_max_x' : maximum lead wrist angle (x) between load and contact (deg)
-'pelvis_angular_velocity_fm_x' : pelvis angular velocity at first move (deg/sec) 
-'pelvis_angular_velocity_fp_x': pelvis angular velocity at foot plant (deg/sec) 
-'pelvis_angular_velocity_maxhss_x': pelvis angular velocity at maximum hip-shoulder separation (deg/sec) 
-'pelvis_angular_velocity_seq_max_x' : maximum pelvis angular velocity between first move and contact (deg/sec) 
-'pelvis_angular_velocity_stride_max_x' : maximum pelvis angular velocity between load and foot plant (deg/sec) 
-'pelvis_angular_velocity_swing_max_x' : maximum pelvis angular velocity between load and contact (deg/sec) 
+'pelvis_angular_velocity_fm_x' : pelvis angular velocity at first move (deg/sec)
+'pelvis_angular_velocity_fp_x': pelvis angular velocity at foot plant (deg/sec)
+'pelvis_angular_velocity_maxhss_x': pelvis angular velocity at maximum hip-shoulder separation (deg/sec)
+'pelvis_angular_velocity_seq_max_x' : maximum pelvis angular velocity between first move and contact (deg/sec)
+'pelvis_angular_velocity_stride_max_x' : maximum pelvis angular velocity between load and foot plant (deg/sec)
+'pelvis_angular_velocity_swing_max_x' : maximum pelvis angular velocity between load and contact (deg/sec)
 'pelvis_fm_x' : pelvis angle (x) at first move (deg)
 'pelvis_fm_y' : pelvis angle (y) at first move (deg)
 'pelvis_fm_z' : pelvis angle (z) at first move (deg)
@@ -230,12 +230,12 @@ Kinematic metrics commonly referenced in biomechanical analyses are arranged int
 'rear_shoulder_stride_max_x' : maximum rear shoulder angle (x) between the load and foot plant (deg)
 'rear_shoulder_stride_max_y' : maximum rear shoulder angle (y) between the load and foot plant (deg)
 'rear_shoulder_stride_max_z' : maximum rear shoulder angle (z) between the load and foot plant (deg)
-'torso_angular_velocity_fm_x' : torso angular velocity at first move (deg/sec) 
-'torso_angular_velocity_fp_x' : torso angular velocity at foot plant (deg/sec) 
-'torso_angular_velocity_maxhss_x' : torso angular velocity at maximum hip-shoulder separation (deg/sec) 
-'torso_angular_velocity_seq_max_x' : maximum torso angular velocity between first move and contact (deg/sec) 
-'torso_angular_velocity_stride_max_x' : maximum torso angular velocity between the load and foot plant (deg/sec) 
-'torso_angular_velocity_swing_max_x' : maximum torso angular velocity between the load and contact (deg/sec) 
+'torso_angular_velocity_fm_x' : torso angular velocity at first move (deg/sec)
+'torso_angular_velocity_fp_x' : torso angular velocity at foot plant (deg/sec)
+'torso_angular_velocity_maxhss_x' : torso angular velocity at maximum hip-shoulder separation (deg/sec)
+'torso_angular_velocity_seq_max_x' : maximum torso angular velocity between first move and contact (deg/sec)
+'torso_angular_velocity_stride_max_x' : maximum torso angular velocity between the load and foot plant (deg/sec)
+'torso_angular_velocity_swing_max_x' : maximum torso angular velocity between the load and contact (deg/sec)
 'torso_fm_x' : torso angle (x) at first move (deg)
 'torso_fm_y' : torso angle (y) at first move (deg)
 'torso_fm_z' : torso angle (z) at first move (deg)
@@ -258,17 +258,18 @@ Kinematic metrics commonly referenced in biomechanical analyses are arranged int
 'torso_swing_max_x' : maximum torso angle (x) between the load and contact (deg)
 'torso_swing_max_y' : maximum torso angle (y) between the load and contact (deg)
 'torso_swing_max_z' : maximum torso angle (z) between the load and contact (deg)
-'upper_arm_speed_mag_fm_x' : resultant upper arm speed at first move (deg/sec) 
-'upper_arm_speed_mag_fp_x' : resultant upper arm speed at foot plant (deg/sec) 
-'upper_arm_speed_mag_maxhss_x' : resultant upper arm speed at maximum hip-shoulder separation (deg/sec) 
-'upper_arm_speed_mag_seq_max_x' : maximum resultant upper arm speed between first move and contact (deg/sec) 
-'upper_arm_speed_mag_stride_max_velo_x' : maximum resultant upper arm speed between the load and foot plant (deg/sec) 
-'upper_arm_speed_mag_swing_max_velo_x' : maximum resultant upper arm speed between the load and contact (deg/sec) 
+'upper_arm_speed_mag_fm_x' : resultant upper arm speed at first move (deg/sec)
+'upper_arm_speed_mag_fp_x' : resultant upper arm speed at foot plant (deg/sec)
+'upper_arm_speed_mag_maxhss_x' : resultant upper arm speed at maximum hip-shoulder separation (deg/sec)
+'upper_arm_speed_mag_seq_max_x' : maximum resultant upper arm speed between first move and contact (deg/sec)
+'upper_arm_speed_mag_stride_max_velo_x' : maximum resultant upper arm speed between the load and foot plant (deg/sec)
+'upper_arm_speed_mag_swing_max_velo_x' : maximum resultant upper arm speed between the load and contact (deg/sec)
 'x_factor_hs_x' : x-factor angle (x) at heel strike (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_hs_y' : x-factor angle (y) at heel strike (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'x_factor_hs_z' : x-factor angle (z) at heel strike (same as torso-pelvis angle) - using K-Vest conventions (deg)
 'max_cog_velo_x' : maximum center of gravity velocity from start of take to end of take (meters per second)
 ```
+
 In addition to biomechanical POI metrics, we also provide pitch level HitTrax data in `~\data\poi\hittrax.csv`. Those familiar with exporting raw HitTrax data should recognize most of the columns.
 
 ```python
@@ -291,7 +292,7 @@ HitTrax strike zone zones are as follows:
 
 ![hittrax_zones.png](imgs/hittrax_zones.png)
 
-***HitTrax Zones from the pitcher's perspective***
+**_HitTrax Zones from the pitcher's perspective_**
 
 # About the Data
 
