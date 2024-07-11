@@ -1,25 +1,41 @@
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import xgboost as xgb
+import numpy as np
 import matplotlib.pyplot as plt
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import shap
 
-# Set random seed for reproducibility
-np.random.seed(42)
 
-# Load data
-file_path = '/Users/leofeingold/Documents/GitHub/openbiomechanics/bat_speed_predictor/poi_metrics.csv'
-poi_metrics = pd.read_csv(file_path)
+# set random seed for reproducibility
+#np.random.seed(42)
 
-# Specify the columns to use
+# load data
+poi_metrics = pd.read_csv("/Users/leofeingold/Documents/GitHub/openbiomechanics/baseball_hitting/data/poi/poi_metrics.csv")
+metadata = pd.read_csv("/Users/leofeingold/Documents/GitHub/openbiomechanics/baseball_hitting/data/metadata.csv")
+
+
+# check for common keys
+common_keys = set(poi_metrics['session_swing']).intersection(set(metadata['session_swing']))
+print(f"Number of common keys in 'session_swing': {len(common_keys)}")
+
+# check data types
+print("POI Metrics 'session_swing' dtype:", poi_metrics['session_swing'].dtype)
+print("Metadata 'session_swing' dtype:", metadata['session_swing'].dtype)
+
+# perform the merge if there are common keys
+if common_keys:
+    poi_metrics = poi_metrics.merge(metadata[["session_swing", "session_mass_lbs", "bat_weight_oz"]], on="session_swing")
+
+else:
+    print("No common keys found in 'session_swing' between POI Metrics and Metadata.")
+
 poi_columns = [
-    'session_swing', 
-    'session',
     'blast_bat_speed_mph_x',
+    "bat_weight_oz",
     'bat_torso_angle_connection_x', 
-    'attack_angle_contact_x', 
     'bat_torso_angle_ds_x', 
     'bat_torso_angle_ds_y', 
     'bat_torso_angle_ds_z', 
@@ -124,58 +140,63 @@ poi_columns = [
     'x_factor_hs_x', 
     'x_factor_hs_y', 
     'x_factor_hs_z', 
-    'max_cog_velo_x'
+    'max_cog_velo_x',
+    'session_mass_lbs' 
 ]
 
+# handle na values
 poi_metrics = poi_metrics[poi_columns].dropna()
+print(poi_metrics.shape)
 
-# Prepare the data
+# prepare the data
 X = poi_metrics.drop('blast_bat_speed_mph_x', axis=1)
+X = X.apply(pd.to_numeric, errors='coerce')
+cols_with_na = X.columns[X.isna().any()].tolist()
+print(f"Columns with NA values: {cols_with_na}")
+X = X.dropna(axis=1, how='any')
+print(f"X Shape: {X.shape}")
 y = poi_metrics["blast_bat_speed_mph_x"]
 
-# Scale values for better regression results
+
+# Check for multicollinearity and remove highly correlated features
+threshold = 5.0  # Variance Inflation Factor threshold
+vif_data = pd.DataFrame()
+vif_data["feature"] = X.columns
+vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+X = X.loc[:, vif_data[vif_data["VIF"] < threshold]["feature"]]
+
+
+
+# scale values for better regression results
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# Split into training and testing data
+# split into training and testing data
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
-# Train the model using XGBRegressor
-simple_model = xgb.XGBRegressor(random_state=42)
+# train the model using XGBRegressor
+simple_model = xgb.XGBRegressor()
 simple_model.fit(X_train, y_train)
 
-# Make predictions
-y_pred_simple = simple_model.predict(X_test)
+# save the model
+simple_model.save_model('simple_model.json')
 
-# Evaluate model
-mse_score_simple = mean_squared_error(y_test, y_pred_simple)
-mae_score_simple = mean_absolute_error(y_test, y_pred_simple)
-r2score_simple = r2_score(y_test, y_pred_simple)
+# make predictions
+y_pred = simple_model.predict(X_test)
 
-# Determine feature importance
-importance_simple = simple_model.feature_importances_
-importance_df_simple = pd.DataFrame({
-    'feature': X.columns,
-    'importance': importance_simple
-}).sort_values(by='importance', ascending=False)
+# evaluate model
+mse_score = mean_squared_error(y_test, y_pred)
+mae_score = mean_absolute_error(y_test, y_pred)
+r2score = r2_score(y_test, y_pred)
 
-# Plot feature importance
-plt.figure(figsize=(10, 8))
-plt.barh(importance_df_simple['feature'], importance_df_simple['importance'], color='skyblue')
-plt.xlabel('Importance')
-plt.ylabel('Feature')
-plt.title('Feature Importance')
-plt.gca().invert_yaxis()
-plt.xticks(fontsize=10)
-plt.yticks(fontsize=8)  # Set smaller font size for y-axis labels
-plt.show()
+print(f"MSE: {mse_score}")
+print(f"MAE: {mae_score}")
+print(f"r^2: {r2score}")
 
-# Output new model results
-new_results = {
-    "MSE": mse_score_simple,
-    "MAE": mae_score_simple,
-    "r2": r2score_simple,
-    "importance_df": importance_df_simple
-}
+# determine feature importance using SHAP
+explainer = shap.Explainer(simple_model)
+shap_values = explainer.shap_values(X_train)
+shap.summary_plot(shap_values, X_train, feature_names=X.columns)
 
-print(new_results)
+# plot data for important features using SHAP
+shap.summary_plot(shap_values, X_train, feature_names=X.columns, plot_type="bar")

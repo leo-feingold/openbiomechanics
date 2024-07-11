@@ -5,11 +5,12 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import xgboost as xgb
 import numpy as np
 import matplotlib.pyplot as plt
+import shap
 
-# Set random seed for reproducibility
+# set random seed for reproducibility
 np.random.seed(42)
 
-# Load data
+# load data
 poi_metrics = pd.read_csv("/Users/leofeingold/Documents/GitHub/openbiomechanics/baseball_hitting/data/poi/poi_metrics.csv")
 
 poi_columns = [
@@ -125,33 +126,34 @@ poi_columns = [
     'max_cog_velo_x'
 ]
 
+# handle na values
 poi_metrics = poi_metrics[poi_columns].dropna()
-print(poi_metrics.size)
+print(poi_metrics.shape)
 
-# Prepare the data
+# prepare the data
 X = poi_metrics.drop('blast_bat_speed_mph_x', axis=1)
 y = poi_metrics["blast_bat_speed_mph_x"]
 
-# Scale values for better regression results
+# scale values for better regression results
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# Split into training and testing data
+# split into training and testing data
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
-# Train the model using XGBRegressor
+# train the model using XGBRegressor
 simple_model = xgb.XGBRegressor()
 simple_model.fit(X_train, y_train)
 
-# Make predictions
+# make predictions
 y_pred = simple_model.predict(X_test)
 
-# Evaluate model
+# evaluate model
 mse_score = mean_squared_error(y_test, y_pred)
 mae_score = mean_absolute_error(y_test, y_pred)
 r2score = r2_score(y_test, y_pred)
 
-# Determine feature importance
+# determine feature importance
 importance = simple_model.feature_importances_
 importance_df = pd.DataFrame({
     'feature': X.columns,
@@ -162,16 +164,19 @@ print(f"MSE: {mse_score}")
 print(f"MAE: {mae_score}")
 print(f"r^2: {r2score}")
 
+# plot data for important features
 importance_df = importance_df[importance_df['importance'] > 0.00001]
 
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(10, 7))
 plt.barh(importance_df['feature'], importance_df['importance'], color='skyblue')
 plt.xlabel('Importance')
 plt.ylabel('Feature')
-plt.title('Feature Importance')
+plt.title('Bat Speed Feature Importance: Min importance: 0.00001')
 plt.gca().invert_yaxis()
-plt.xticks(fontsize=10)
+plt.xticks(fontsize=5)
 plt.yticks(fontsize=5)  # set smaller font size for y-axis labels
+plt.tight_layout()
 plt.show()
 
 print(importance_df.head(10))
+
