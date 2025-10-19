@@ -61,7 +61,6 @@ print(ymin)
 # Plot markers at the bottom of the graph
 ax1.plot(fp_100_time, -100, '|', color='black', markersize=20, label="Foot Plant, Contact")  # Black marker for fp_100_time
 ax1.plot(contact_time, -100, '|', color='black', markersize=20)  # Black marker for contact_time
-ax1.axvline(x=max_pelvis_time, color = 'black', linestyle='--', label='Time of Max Pelvis Angular Velocity')
 
 
 # Add a title and legend
